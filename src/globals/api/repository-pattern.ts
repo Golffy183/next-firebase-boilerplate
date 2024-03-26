@@ -1,4 +1,4 @@
-import { HelperType } from '../../../core/universal-helper';
+import { HelperType } from '../helpers';
 
 export type TypeRepositoryPattern = {
   ReadUserProfile: () => Promise<HelperType.TypeAPIDataHandleResponse>;
