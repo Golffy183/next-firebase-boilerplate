@@ -7,4 +7,6 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "windicss.sortOnSave": true,
+  "windicss.colorDecoratorsType": "bg"
 }

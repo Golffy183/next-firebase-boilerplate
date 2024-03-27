@@ -1,5 +1,12 @@
 {
   "Home": {
     "title": "English"
+  },
+  "Navbar": {
+    "header": {
+      "home": "Home",
+      "login": "Login",
+      "about": "About"
+    }
   }
 }

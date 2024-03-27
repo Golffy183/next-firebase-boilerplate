@@ -12,7 +12,6 @@ export const StateMapping = (
   }
 
   if (stateList.length == 0) {
-    console.log('not have store element');
     return;
   }
   // One Element Not Use Shallow
@@ -21,7 +20,6 @@ export const StateMapping = (
       if (stateList[0] in state) {
         return state[stateList[0]];
       } else {
-        console.log('Not Have Store :', stateList[0]);
         return;
       }
     });
@@ -35,8 +33,6 @@ export const StateMapping = (
         if (stateList[index] in state) {
           const objMapping = { [stateList[index]]: state[stateList[index]] };
           Object.assign(obj, objMapping);
-        } else {
-          console.log('Not Have Store :', stateList[index]);
         }
       }
       return obj;

@@ -6,10 +6,12 @@ const nextIntlMiddleware = createMiddleware({
   defaultLocale: 'en',
 });
 
-export default function (req: NextRequest): NextResponse {
+export const nextIntl = (req: NextRequest): NextResponse => {
   return nextIntlMiddleware(req);
-}
+};
 
 export const config = {
   matcher: ['/', '/(en|th)/:path*'],
 };
+
+export default nextIntl;

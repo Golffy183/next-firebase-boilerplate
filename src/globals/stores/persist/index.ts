@@ -8,7 +8,6 @@ export type TypeStoreGlobalPersist = {
   userData: any;
   langData: {
     lang: string;
-    font: string;
   };
 };
 
@@ -18,8 +17,7 @@ export const StoreGlobalPersist = createWithEqualityFn(
     (): TypeStoreGlobalPersist => ({
       userData: null,
       langData: {
-        lang: 'en',
-        font: 'SRB',
+        lang: '',
       },
     }),
     {
@@ -32,14 +30,14 @@ export const StoreGlobalPersist = createWithEqualityFn(
 
 export type TypeMethodStoreGlobalPersist = {
   setUserData: (userData: any) => void;
-  setLangData: (langData: { lang: string; font: string }) => void;
+  setLangData: (langData: { lang: string }) => void;
 };
 
 const methodStoreGlobalPersist: TypeMethodStoreGlobalPersist = {
   setUserData: (userData: any) => {
     StoreGlobalPersist.setState({ userData });
   },
-  setLangData: (langData: { lang: string; font: string }) => {
+  setLangData: (langData: { lang: string }) => {
     StoreGlobalPersist.setState({ langData });
   },
 };

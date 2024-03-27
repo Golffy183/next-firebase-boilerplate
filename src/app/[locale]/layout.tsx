@@ -3,11 +3,14 @@ import React from 'react';
 import { Inter } from 'next/font/google';
 import '@/globals/globals.css';
 import '@/globals/tailwind.css';
+import '@/globals/font.css';
 import { MiddlewareInit } from '@/core/middlewares';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import type { Viewport } from 'next';
+import Navbar from '../components/layout/navbar';
+import Footer from '../components/layout/footer';
 
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'PWA with Next',
@@ -49,8 +52,12 @@ const RootLayout: React.FC<Props> = ({ children, params: { locale } }) => {
 
   return (
     <html lang={locale}>
-      <body className={inter.className}>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+      <body className="font-SRB">
+        <NextIntlClientProvider messages={messages}>
+          <Navbar />
+          {children}
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

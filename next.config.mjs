@@ -16,6 +16,9 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV !== 'development',
   },
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default PWA(nextIntlConfig(nextConfig));

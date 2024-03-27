@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js';
 const getKey = () => {
   const key = process.env.ENV_ENCRYPTION_KEY;
   if (!key || key.length > 32) {
-    throw new Error('Invalid encryption key');
+    return '';
   }
   return key;
 };
