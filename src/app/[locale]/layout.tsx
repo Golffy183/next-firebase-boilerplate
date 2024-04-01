@@ -1,16 +1,14 @@
 import type { Metadata } from 'next';
 import React from 'react';
-import { Inter } from 'next/font/google';
 import '@/globals/globals.css';
 import '@/globals/tailwind.css';
 import '@/globals/font.css';
 import { MiddlewareInit } from '@/core/middlewares';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import type { Viewport } from 'next';
-import Navbar from '../components/layout/navbar';
+import NavbarContainer from '../components/layout/navbar-container';
 import Footer from '../components/layout/footer';
-
-// const inter = Inter({ subsets: ['latin'] });
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   title: 'PWA with Next',
@@ -18,6 +16,9 @@ export const metadata: Metadata = {
   generator: 'Next.js',
   manifest: '/manifest.json',
   keywords: ['nextjs', 'nextjs14', 'next14', 'pwa', 'next-pwa'],
+  alternates: {
+    canonical: process.env.SITE_URL,
+  },
   authors: [
     { name: 'Kowit Narongtuwapan' },
     {
@@ -48,15 +49,16 @@ type Props = {
 
 const RootLayout: React.FC<Props> = ({ children, params: { locale } }) => {
   MiddlewareInit();
-  const messages = useMessages();
 
   return (
     <html lang={locale}>
       <body className="font-SRB">
-        <NextIntlClientProvider messages={messages}>
-          <Navbar />
-          {children}
-          <Footer />
+        <NextIntlClientProvider messages={useMessages()}>
+          <Providers>
+            <NavbarContainer />
+            {children}
+            <Footer />
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>

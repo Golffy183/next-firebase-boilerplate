@@ -6,9 +6,6 @@ import { HelperZustand } from '@/globals/helpers';
 // ============ Store ==============
 export type TypeStoreGlobalPersist = {
   userData: any;
-  langData: {
-    lang: string;
-  };
 };
 
 // cant use method
@@ -16,9 +13,6 @@ export const StoreGlobalPersist = createWithEqualityFn(
   persist(
     (): TypeStoreGlobalPersist => ({
       userData: null,
-      langData: {
-        lang: '',
-      },
     }),
     {
       name: 'storage-user',
@@ -30,15 +24,11 @@ export const StoreGlobalPersist = createWithEqualityFn(
 
 export type TypeMethodStoreGlobalPersist = {
   setUserData: (userData: any) => void;
-  setLangData: (langData: { lang: string }) => void;
 };
 
 const methodStoreGlobalPersist: TypeMethodStoreGlobalPersist = {
   setUserData: (userData: any) => {
     StoreGlobalPersist.setState({ userData });
-  },
-  setLangData: (langData: { lang: string }) => {
-    StoreGlobalPersist.setState({ langData });
   },
 };
 

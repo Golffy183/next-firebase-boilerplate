@@ -1,6 +1,24 @@
 {
   "Home": {
-    "title": "ภาษาไทย"
+    "language": "ภาษาไทย",
+    "content": {
+      "docs": {
+        "title": "เอกสาร",
+        "description": "ค้นหาข้อมูลเชิงลึกเกี่ยวกับคุณสมบัติและ API ของ Next.js"
+      },
+      "learn": {
+        "title": "เรียนรู้",
+        "description": "เรียนรู้เกี่ยวกับ Next.js ในคอร์สที่มีการทดสอบความรู้!"
+      },
+      "template": {
+        "title": "แม่แบบ",
+        "description": "สำรวจแม่แบบเริ่มต้นสำหรับ Next.js"
+      },
+      "deploy": {
+        "title": "เผยแพร่",
+        "description": "เผยแพร่เว็บไซต์ Next.js ของคุณไปยัง URL สาธารณะทันทีด้วย Vercel"
+      }
+    }
   },
   "Navbar": {
     "header": {

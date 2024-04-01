@@ -14,7 +14,6 @@ export const HandleToThrowResponse = async (promise: Promise<TypeHandleResponse>
     const resPromise = await promise;
     return resPromise.res;
   } catch (error) {
-    console.log('error :', error);
     throw error;
   }
 };

@@ -1,9 +1,11 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
+import { locales, localePrefix } from './core/navigation';
 
 const nextIntlMiddleware = createMiddleware({
-  locales: ['en', 'th'],
   defaultLocale: 'en',
+  localePrefix,
+  locales,
 });
 
 export const nextIntl = (req: NextRequest): NextResponse => {
