@@ -29,19 +29,12 @@ export default function NavbarContainer() {
   ];
 
   return (
-    <Navbar disableAnimation={false} isBordered className="dark:bg-slate-950">
+    <Navbar disableAnimation={false} isBordered className="dark:bg-slate-950 bg-white">
       <NavbarContent className="sm:hidden" justify="start">
         <li>
-          <NavbarMenuToggle className="dark:invert" />
+          <NavbarMenuToggle className="dark:text-white" />
         </li>
-      </NavbarContent>
-
-      <NavbarContent className="pr-3 sm:hidden" justify="center">
-        <li className="flex flex-row space-x-1 inset-y-0 left-[16.5%] absolute items-center">
-          <ThemeSwitcher />
-          <LanguageSwitcher />
-        </li>
-        <li className="flex items-center justify-center">
+        <li className="flex flex-row inset-y-0 left-[16.5%] absolute items-center dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
           <Image
             className="dark:invert dark:drop-shadow-[0_0_0.3rem_#ffffff70]"
             src="../icons/icon-512x512.png"
@@ -50,9 +43,7 @@ export default function NavbarContainer() {
             alt="logo"
             priority
           />
-          <p className="font-bold text-inherit ml-2 dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
-            Next
-          </p>
+          <p className="font-bold text-inherit ml-2 ">Next</p>
         </li>
       </NavbarContent>
 
@@ -115,7 +106,12 @@ export default function NavbarContainer() {
         {/* <NavbarItem className="hidden lg:flex">
           <Link href="#">Login</Link>
         </NavbarItem> */}
+
         <li className="hidden sm:flex sm:space-x-2 sm:items-center sm:justify-center">
+          <ThemeSwitcher />
+          <LanguageSwitcher />
+        </li>
+        <li className="flex sm:hidden items-center justify-end space-x-1">
           <ThemeSwitcher />
           <LanguageSwitcher />
         </li>

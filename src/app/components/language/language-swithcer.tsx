@@ -39,10 +39,10 @@ export default function LanguageSwitcher() {
           selectedKeys={selectedKeys}
           onAction={(key) => router.replace(pathname, { locale: key.toString() })}
         >
-          <DropdownItem className="dark:text-slate-400" key="en">
+          <DropdownItem className="dark:text-slate-400 text-black" key="en">
             English
           </DropdownItem>
-          <DropdownItem className="dark:text-slate-400" key="th">
+          <DropdownItem className="dark:text-slate-400 text-black" key="th">
             ไทย
           </DropdownItem>
         </DropdownMenu>
