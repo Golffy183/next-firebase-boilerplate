@@ -17,22 +17,31 @@ import {
 import { ThemeSwitcher } from '../theme/theme-swithcer';
 import LanguageSwitcher from '../language/language-swithcer';
 import { usePathname, useRouter } from '@/core/navigation';
+import { useState } from 'react';
 
 export default function NavbarContainer() {
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
   const menuItems = [
-    { href: `#`, text: t('Navbar.header.home') },
+    { href: `/`, text: t('Navbar.header.home') },
     // { href: `/login`, text: t('Navbar.header.login') },
     { href: `/about`, text: t('Navbar.header.about') },
   ];
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <Navbar disableAnimation={false} isBordered className="dark:bg-slate-950 bg-white">
+    <Navbar
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      disableAnimation={false}
+      isBordered
+      className="dark:bg-slate-950 bg-white"
+    >
       <NavbarContent className="sm:hidden" justify="start">
         <li>
-          <NavbarMenuToggle className="dark:text-white" />
+          <NavbarMenuToggle className="dark:text-white text-black" />
         </li>
         <li className="flex flex-row inset-y-0 left-[16.5%] absolute items-center dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
           <Image
@@ -43,7 +52,7 @@ export default function NavbarContainer() {
             alt="logo"
             priority
           />
-          <p className="font-bold text-inherit ml-2 ">Next</p>
+          <p className="font-bold text-inherit ml-2 text-black dark:text-white">Next</p>
         </li>
       </NavbarContent>
 
@@ -128,15 +137,16 @@ export default function NavbarContainer() {
             <li key={`${item}-${index}`}>
               <NavbarMenuItem>
                 <Link
-                  className="w-full"
-                  color={
-                    index === 2
-                      ? 'warning'
-                      : index === menuItems.length - 1
-                        ? 'danger'
-                        : 'foreground'
+                  className={
+                    item.href === pathname
+                      ? 'font-bold'
+                      : 'font-normal' + ' w-full cursor-pointer'
                   }
-                  href={item.href}
+                  color={item.href === pathname ? 'warning' : 'foreground'}
+                  onPress={() => {
+                    router.push(item.href);
+                    setIsMenuOpen(false);
+                  }}
                 >
                   {item.text}
                 </Link>
