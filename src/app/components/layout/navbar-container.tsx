@@ -66,7 +66,7 @@ export default function NavbarContainer() {
             alt="logo"
             priority
           />
-          <p className="font-bold text-inherit ml-2 dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
+          <p className="font-bold text-inherit ml-2 text-black dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
             Next
           </p>
         </li>
