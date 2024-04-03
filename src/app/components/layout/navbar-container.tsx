@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 import {
   Navbar,
-  NavbarBrand,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,

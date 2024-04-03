@@ -1,6 +1,6 @@
 {
-  "name": "Next PWA",
-  "short_name": "PWA",
+  "name": "PWA with Next",
+  "short_name": "PWA Next",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone",

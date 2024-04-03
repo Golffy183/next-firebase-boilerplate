@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: 'PWA with Next',
   description: 'PWA application with Next',
   generator: 'Next.js',
-  manifest: '/manifest.json',
+  manifest: '/manifest.webmanifest',
   keywords: ['nextjs', 'nextjs14', 'next14', 'pwa', 'next-pwa'],
   alternates: {
     canonical: process.env.SITE_URL,
@@ -35,7 +35,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  minimumScale: 1,
   viewportFit: 'cover',
   themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#fff' }],
 };
