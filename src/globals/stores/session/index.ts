@@ -4,72 +4,36 @@ import { HelperZustand } from '@/globals/helpers';
 
 export type TypeStoreGlobal = {
   isLoading: boolean;
-  sI18NDomainName: string;
-  menu: {
-    sHeaderName: string;
-    footer: string;
-    iIconID: number;
-  };
   menuUIIsShow: {
     isShowHeader: boolean;
-    isShowI18n: boolean;
     isShowFooter: boolean;
   };
-  menuHeader: JSX.Element | null;
 };
 
 export const StoreGlobal = createWithEqualityFn(
   (): TypeStoreGlobal => ({
-    isLoading: false,
-    sI18NDomainName: '',
-    menu: {
-      sHeaderName: '',
-      footer: '',
-      iIconID: 0,
-    },
+    isLoading: true,
     menuUIIsShow: {
-      isShowHeader: false,
-      isShowI18n: false,
-      isShowFooter: false,
+      isShowHeader: true,
+      isShowFooter: true,
     },
-    menuHeader: null,
   }),
 );
 
 // ============ Method ==============
 export type TypeMethodStoreGlobal = {
   setIsLoading: (isLoading: boolean) => void;
-  setMenu: (sHeaderName: string, footer: string, iIconID: number) => void;
-  setI18NDomainName: (sI18NDomainName: string) => void;
-  setMenuUIIsShow: (
-    isShowHeader: boolean,
-    isShowI18n: boolean,
-    isShowFooter: boolean,
-  ) => void;
-  setMenuHeader: (menuHeader: JSX.Element) => void;
+  setMenuUIIsShow: (isShowHeader: boolean, isShowFooter: boolean) => void;
 };
 
 const methodStoreGlobal: TypeMethodStoreGlobal = {
   setIsLoading: (isLoading: boolean) => {
     StoreGlobal.setState({ isLoading });
   },
-  setMenu: (sHeaderName: string, footer: string, iIconID: number) => {
-    StoreGlobal.setState({ menu: { sHeaderName, footer, iIconID } });
-  },
-  setI18NDomainName: (sI18NDomainName: string) => {
-    StoreGlobal.setState({ sI18NDomainName: sI18NDomainName });
-  },
-  setMenuUIIsShow: (
-    isShowHeader: boolean,
-    isShowI18n: boolean,
-    isShowFooter: boolean,
-  ) => {
+  setMenuUIIsShow: (isShowHeader: boolean, isShowFooter: boolean) => {
     StoreGlobal.setState({
-      menuUIIsShow: { isShowHeader, isShowI18n, isShowFooter },
+      menuUIIsShow: { isShowHeader, isShowFooter },
     });
-  },
-  setMenuHeader: (menuHeader: JSX.Element) => {
-    StoreGlobal.setState({ menuHeader });
   },
 };
 

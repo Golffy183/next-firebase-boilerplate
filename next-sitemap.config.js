@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://example.com',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   robotsTxtOptions: {
@@ -10,6 +10,6 @@ module.exports = {
         allow: '/',
       },
     ],
-    additionalSitemaps: [`${process.env.SITE_URL}/sitemap.xml`],
+    additionalSitemaps: [`${process.env.NEXT_PUBLIC_SITE_URL}/sitemap.xml`],
   },
 };

@@ -4,8 +4,8 @@ export const HandleResponse = async (promiseAPI: any): Promise<TypeHandleRespons
   try {
     const res = await promiseAPI;
     return { res: res, error: null };
-  } catch (error) {
-    return { res: null, error: error as Error };
+  } catch (error: any) {
+    return { res: null, error: error as Error, errorCode: error.code };
   }
 };
 

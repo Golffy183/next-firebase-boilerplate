@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js';
 
 const getKey = () => {
-  const key = process.env.ENV_ENCRYPTION_KEY;
+  const key = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
   if (!key || key.length > 32) {
     return '';
   }
@@ -24,13 +24,13 @@ export const Encrypted = (text: string) => {
 export const Decrypted = (text: string) => {
   try {
     if (!text) {
-      throw new Error('No text provided for decryption');
+      return '';
     }
     const decoded = atob(text);
     const decodedKey = decoded.replace(key, '');
     const decoded2 = CryptoJS.AES.decrypt(decodedKey, key).toString(CryptoJS.enc.Utf8);
     return decoded2;
   } catch (error: any) {
-    throw new Error(`Decryption failed: ${error.message}`);
+    return '';
   }
 };

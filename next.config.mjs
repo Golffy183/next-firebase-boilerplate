@@ -1,5 +1,6 @@
 import withNextIntl from 'next-intl/plugin';
 import withPWA from 'next-pwa';
+import million from 'million/compiler';
 
 const nextIntlConfig = withNextIntl();
 
@@ -12,7 +13,7 @@ const PWA = withPWA({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   compiler: {
     removeConsole: process.env.NODE_ENV !== 'development',
   },
@@ -21,4 +22,8 @@ const nextConfig = {
   },
 };
 
-export default PWA(nextIntlConfig(nextConfig));
+const millionConfig = {
+  auto: true,
+};
+
+export default million.next(PWA(nextIntlConfig(nextConfig), millionConfig));

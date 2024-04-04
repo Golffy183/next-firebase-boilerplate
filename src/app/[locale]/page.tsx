@@ -2,14 +2,22 @@
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { HelperInit } from '@/globals/helpers';
+import { useEffect } from 'react';
 
 export default function Home() {
   const t = useTranslations();
 
+  useEffect(() => {
+    HelperInit.InitPage({
+      menuUIIsShow: { isShowHeader: true, isShowFooter: true },
+      loadTimeout: 1500,
+    });
+  }, []);
+
   return (
     <main className="flex flex-col min-h-screen bg-gray-50 p-20 text-gray-900 items-center justify-between lg:p-24 dark:bg-gray-800 dark:text-gray-100">
       <div className="flex flex-col">
-        <div className="flex flex-row space-x-4 mb-10 justify-center item"></div>
         <div className="flex flex-col mb-10 gap-y-6 place-items-center">
           <Image
             className="dark:invert dark:drop-shadow-[0_0_0.3rem_#00000070]"

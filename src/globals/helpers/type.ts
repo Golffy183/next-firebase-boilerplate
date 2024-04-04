@@ -1,4 +1,4 @@
-export type TypeHandleResponse = { res: any; error: Error | null };
+export type TypeHandleResponse = { res: any; error: Error | null; errorCode?: string };
 
 export const ReturnInterfacePromise = (res: any): Promise<any> => {
   return Promise.resolve(res);

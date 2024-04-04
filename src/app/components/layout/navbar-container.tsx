@@ -17,18 +17,27 @@ import { ThemeSwitcher } from '../theme/theme-swithcer';
 import LanguageSwitcher from '../language/language-swithcer';
 import { usePathname, useRouter } from '@/core/navigation';
 import { useState } from 'react';
+import { UseStoreGlobal } from '@/globals/stores/session';
+import { useNavigateLoader } from '../../hooks/navigate-loader';
 
 export default function NavbarContainer() {
+  const { menuUIIsShow } = UseStoreGlobal(['menuUIIsShow']);
+
   const t = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
+  const navigateWithLoader = useNavigateLoader();
+
   const menuItems = [
     { href: `/`, text: t('Navbar.header.home') },
-    // { href: `/login`, text: t('Navbar.header.login') },
     { href: `/about`, text: t('Navbar.header.about') },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  if (!menuUIIsShow.isShowHeader) {
+    return <></>;
+  }
 
   return (
     <Navbar
@@ -82,19 +91,6 @@ export default function NavbarContainer() {
             {t('Navbar.header.home')}
           </Link>
         </NavbarItem>
-        {/* <NavbarItem>
-          <Link
-            className="cursor-pointer"
-            onPress={() => {
-              router.push('/login');
-            }}
-            style={{ fontSize: 'min(max(0.75rem, 1vw), 1rem)' }}
-            aria-current="page"
-            color="warning"
-          >
-            {t('Navbar.header.login')}
-          </Link>
-        </NavbarItem> */}
         <NavbarItem isActive={pathname === '/about' ? true : false}>
           <Link
             className="cursor-pointer"
@@ -111,10 +107,6 @@ export default function NavbarContainer() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        {/* <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem> */}
-
         <li className="hidden sm:flex sm:space-x-2 sm:items-center sm:justify-center">
           <ThemeSwitcher />
           <LanguageSwitcher />
@@ -124,7 +116,12 @@ export default function NavbarContainer() {
           <LanguageSwitcher />
         </li>
         <NavbarItem>
-          <Button as={Link} color="warning" href="#" variant="flat">
+          <Button
+            as={Link}
+            color="warning"
+            onPress={() => navigateWithLoader('/login', 1500)}
+            variant="flat"
+          >
             {t('Navbar.header.login')}
           </Button>
         </NavbarItem>

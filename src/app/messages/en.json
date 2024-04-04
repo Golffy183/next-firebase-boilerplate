@@ -26,5 +26,20 @@
       "login": "Login",
       "about": "About"
     }
+  },
+  "Login": {
+    "title": "Login",
+    "description": "Please login with your account"
+  },
+  "Form": {
+    "validate": {
+      "required": "Please filling space",
+      "min": "Please fill more than {count} character",
+      "tooManyRequest": "Too many request, please try again later",
+      "userOrPasswordWrong": "Wrong user or password",
+      "email": "Invalid email type",
+      "networkRequestFailed": "Can't connect network"
+    },
+    "submit": "Sign in"
   }
 }
