@@ -40,6 +40,11 @@
       "email": "Invalid email type",
       "networkRequestFailed": "Can't connect network"
     },
-    "submit": "Sign in"
+    "placeholder": {
+      "email": "Enter your email",
+      "password": "Enter your password"
+    },
+    "submit": "Sign in",
+    "back": "Back"
   }
 }

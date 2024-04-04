@@ -12,7 +12,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <main>
+    <main className="flex min-h-screen bg-gray-50 p-20 text-gray-900 items-center justify-center lg:p-24 dark:bg-gray-800 dark:text-gray-100">
       <h1>About Page</h1>
     </main>
   );

@@ -19,6 +19,7 @@ import { usePathname, useRouter } from '@/core/navigation';
 import { useState } from 'react';
 import { UseStoreGlobal } from '@/globals/stores/session';
 import { useNavigateLoader } from '../../hooks/navigate-loader';
+import { HelperTime } from '@/globals/helpers';
 
 export default function NavbarContainer() {
   const { menuUIIsShow } = UseStoreGlobal(['menuUIIsShow']);
@@ -119,7 +120,10 @@ export default function NavbarContainer() {
           <Button
             as={Link}
             color="warning"
-            onPress={() => navigateWithLoader('/login', 1500)}
+            onPress={async () => {
+              await HelperTime.WaitForMilliSecond(300);
+              await navigateWithLoader('/login', 1500);
+            }}
             variant="flat"
           >
             {t('Navbar.header.login')}

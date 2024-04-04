@@ -22,9 +22,9 @@ export default function UILoader({ children }: { children: React.ReactNode }) {
       >
         <Puff
           visible={true}
-          height="80"
-          width="80"
-          color="#0f172a"
+          height="120"
+          width="120"
+          color="#1e293b"
           ariaLabel="puff-loading"
           wrapperClass="dark:invert dark:drop-shadow-[0_0_0.3rem_#00000070]"
         />
