@@ -9,8 +9,6 @@ export const FirebaseLogin = async (props: {
   setIsLoading: (isLoading: boolean) => void;
   setErrorMessage: (name: any, error: any) => void;
 }) => {
-  console.log('props', props.username);
-
   const res = await middlewareFirebase.Auth.SignInWithEmailAndPassword(
     props.username,
     props.password,

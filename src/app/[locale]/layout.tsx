@@ -9,7 +9,7 @@ import NavbarContainer from '../components/layout/navbar-container';
 import FooterContainer from '../components/layout/footer-container';
 import { Providers } from './providers';
 import UILoader from '../components/loader/ui-loader';
-import { MiddlewareInit } from '@/core/middlewares';
+import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: 'PWA with Next',
@@ -17,9 +17,6 @@ export const metadata: Metadata = {
   generator: 'Next.js',
   manifest: '/manifest.webmanifest',
   keywords: ['nextjs', 'nextjs14', 'next14', 'pwa', 'next-pwa'],
-  alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL,
-  },
   authors: [
     { name: 'Kowit Narongtuwapan' },
     {
@@ -50,6 +47,18 @@ type Props = {
 const RootLayout: React.FC<Props> = ({ children, params: { locale } }) => {
   return (
     <html lang={locale}>
+      <Head>
+        <link
+          rel="alternate"
+          hrefLang="en"
+          href={process.env.NEXT_PUBLIC_SITE_URL + '/en'}
+        />
+        <link
+          rel="alternate"
+          hrefLang="th"
+          href={process.env.NEXT_PUBLIC_SITE_URL + '/th'}
+        />
+      </Head>
       <body className="font-SRB">
         <NextIntlClientProvider messages={useMessages()}>
           <UILoader>

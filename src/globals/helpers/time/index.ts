@@ -31,7 +31,6 @@ export const ParseDate = (object: any) => {
       if (IsJsonFirestoreTimeStamp(object)) {
         return ConvertJsonFirestoreTimeStampToDate(object);
       }
-      console.log('ParseDate : Not Support');
       return object;
   }
 };
