@@ -84,6 +84,7 @@ export default function LoginPage() {
               {...register('username')}
               isClearable
               size="md"
+              defaultValue=""
               type="email"
               label="Email"
               variant="bordered"
@@ -96,6 +97,7 @@ export default function LoginPage() {
             <Input
               {...register('password')}
               size="md"
+              defaultValue=""
               label="Password"
               variant="bordered"
               isInvalid={!!errors.password || !!errors.root}

@@ -1,9 +1,11 @@
 import { FirebaseApp } from 'firebase/app';
 import {
   Auth,
+  browserLocalPersistence,
   createUserWithEmailAndPassword,
   deleteUser,
   getAuth,
+  setPersistence,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
