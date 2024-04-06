@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen bg-gray-50 p-20 text-gray-900 items-center justify-between lg:p-24 dark:bg-gray-800 dark:text-gray-100">
       <div className="flex flex-col">
-        <div className="flex flex-col mb-10 gap-y-6 place-items-center">
+        <div className="flex flex-col mb-10 gap-y-6 place-items-center dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
           <Image
             className="dark:invert dark:drop-shadow-[0_0_0.3rem_#00000070]"
             src="/icons/next.svg"
@@ -27,9 +27,7 @@ export default function Home() {
             height={37}
             priority
           />
-          <div className="dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
-            {t('Home.language')}
-          </div>
+          {t('Home.language')}
         </div>
       </div>
 
