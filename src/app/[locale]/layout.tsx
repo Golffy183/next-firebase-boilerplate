@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     { rel: 'icon', url: 'icons/icon-128x128.png' },
   ],
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL,
     languages: {
       en: process.env.NEXT_PUBLIC_SITE_URL + '/en',
       th: process.env.NEXT_PUBLIC_SITE_URL + '/th',
