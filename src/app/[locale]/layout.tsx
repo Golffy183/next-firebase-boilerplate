@@ -9,7 +9,6 @@ import NavbarContainer from '../components/layout/navbar-container';
 import FooterContainer from '../components/layout/footer-container';
 import { Providers } from './providers';
 import UILoader from '../components/loader/ui-loader';
-import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: 'PWA with Next',
@@ -28,13 +27,33 @@ export const metadata: Metadata = {
     { rel: 'apple-touch-icon', url: 'icons/icon-128x128.png' },
     { rel: 'icon', url: 'icons/icon-128x128.png' },
   ],
+  alternates: {
+    canonical: process.env.NEXT_PUBLIC_SITE_URL,
+    languages: {
+      en: process.env.NEXT_PUBLIC_SITE_URL + '/en',
+      th: process.env.NEXT_PUBLIC_SITE_URL + '/th',
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#fff' }],
 };
 
 type Props = {
@@ -47,18 +66,6 @@ type Props = {
 const RootLayout: React.FC<Props> = ({ children, params: { locale } }) => {
   return (
     <html lang={locale}>
-      <Head>
-        <link
-          rel="alternate"
-          hrefLang="en"
-          href={process.env.NEXT_PUBLIC_SITE_URL + '/en'}
-        />
-        <link
-          rel="alternate"
-          hrefLang="th"
-          href={process.env.NEXT_PUBLIC_SITE_URL + '/th'}
-        />
-      </Head>
       <body className="font-SRB">
         <NextIntlClientProvider messages={useMessages()}>
           <UILoader>

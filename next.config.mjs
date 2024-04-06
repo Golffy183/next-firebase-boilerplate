@@ -9,6 +9,7 @@ const PWA = withPWA({
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
+  maximumFileSizeToCacheInBytes: 5000000,
 });
 
 /** @type {import('next').NextConfig} */
@@ -20,10 +21,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  swcMinify: true,
 };
 
 const millionConfig = {
   auto: true,
 };
 
-export default million.next(PWA(nextIntlConfig(nextConfig), millionConfig));
+export default million.next(PWA(nextIntlConfig(nextConfig)), millionConfig);
