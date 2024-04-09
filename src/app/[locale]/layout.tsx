@@ -74,15 +74,15 @@ const RootLayout = ({ children, params: { locale } }: Props) => {
   return (
     <html lang={locale}>
       <body className={`${localFontSRB.variable} font-sans`}>
-        <NextIntlClientProvider messages={useMessages()}>
-          <Providers>
-            <UILoader>
+        <UILoader>
+          <NextIntlClientProvider messages={useMessages()} locale={locale}>
+            <Providers>
               <NavbarContainer />
               {children}
               <FooterContainer />
-            </UILoader>
-          </Providers>
-        </NextIntlClientProvider>
+            </Providers>
+          </NextIntlClientProvider>
+        </UILoader>
       </body>
     </html>
   );
