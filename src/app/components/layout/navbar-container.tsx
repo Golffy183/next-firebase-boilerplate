@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { UseStoreGlobal } from '@/globals/stores/session';
 import { useNavigateLoader } from '../../hooks/navigate-loader';
 import { HelperTime } from '@/globals/helpers';
+import { useTheme } from 'next-themes';
 
 export default function NavbarContainer() {
   const { menuUIIsShow } = UseStoreGlobal(['menuUIIsShow']);
@@ -28,6 +29,7 @@ export default function NavbarContainer() {
   const pathname = usePathname();
   const router = useRouter();
   const navigateWithLoader = useNavigateLoader();
+  const { theme } = useTheme();
 
   const menuItems = [
     { href: `/`, text: t('Navbar.header.home') },
@@ -82,7 +84,13 @@ export default function NavbarContainer() {
         <NavbarItem isActive={pathname === '/' ? true : false}>
           <Link
             className="cursor-pointer"
-            color={pathname === '/' ? 'warning' : 'foreground'}
+            color={
+              pathname === '/'
+                ? theme === 'light'
+                  ? 'primary'
+                  : 'warning'
+                : 'foreground'
+            }
             style={{ fontSize: 'min(max(0.75rem, 1vw), 1rem)' }}
             aria-current="page"
             onPress={() => {
@@ -95,7 +103,13 @@ export default function NavbarContainer() {
         <NavbarItem isActive={pathname === '/about' ? true : false}>
           <Link
             className="cursor-pointer"
-            color={pathname === '/about' ? 'warning' : 'foreground'}
+            color={
+              pathname === '/about'
+                ? theme === 'light'
+                  ? 'primary'
+                  : 'warning'
+                : 'foreground'
+            }
             style={{ fontSize: 'min(max(0.75rem, 1vw), 1rem)' }}
             aria-current="page"
             onPress={() => {
@@ -119,7 +133,8 @@ export default function NavbarContainer() {
         <NavbarItem>
           <Button
             as={Link}
-            color="warning"
+            className={theme === 'light' ? 'text-[#2E2EFF]' : ''}
+            color={theme === 'light' ? 'primary' : 'warning'}
             onPress={async () => {
               await HelperTime.WaitForMilliSecond(300);
               await navigateWithLoader('/login', 1500);
@@ -142,7 +157,13 @@ export default function NavbarContainer() {
                       ? 'font-bold'
                       : 'font-normal' + ' w-full cursor-pointer'
                   }
-                  color={item.href === pathname ? 'warning' : 'foreground'}
+                  color={
+                    item.href === pathname
+                      ? theme === 'light'
+                        ? 'primary'
+                        : 'warning'
+                      : 'foreground'
+                  }
                   onPress={() => {
                     router.push(item.href);
                     setIsMenuOpen(false);

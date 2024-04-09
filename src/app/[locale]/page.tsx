@@ -44,7 +44,7 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-xs opacity-50 dark:text-gray-100`}>
+          <p className={`m-0 max-w-[30ch] text-[#525252] text-xs dark:text-gray-200`}>
             {t('Home.content.docs.description')}
           </p>
         </a>
@@ -61,7 +61,7 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-xs opacity-50 dark:text-gray-100`}>
+          <p className={`m-0 max-w-[30ch] text-[#525252] text-xs dark:text-gray-200`}>
             {t('Home.content.learn.description')}
           </p>
         </a>
@@ -78,7 +78,7 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-xs opacity-50 dark:text-gray-100`}>
+          <p className={`m-0 max-w-[30ch] text-[#525252] text-xs dark:text-gray-200`}>
             {t('Home.content.template.description')}
           </p>
         </a>
@@ -95,7 +95,7 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-xs opacity-50 dark:text-gray-100`}>
+          <p className={`m-0 max-w-[30ch] text-[#525252] text-xs dark:text-gray-200`}>
             {t('Home.content.deploy.description')}
           </p>
         </a>

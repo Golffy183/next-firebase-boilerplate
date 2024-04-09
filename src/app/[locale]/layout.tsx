@@ -70,19 +70,19 @@ const localFontSRB = localFont({
   style: 'normal',
 });
 
-const RootLayout: React.FC<Props> = ({ children, params: { locale } }) => {
+const RootLayout = ({ children, params: { locale } }: Props) => {
   return (
     <html lang={locale}>
       <body className={`${localFontSRB.variable} font-sans`}>
-        <UILoader>
-          <NextIntlClientProvider messages={useMessages()}>
-            <Providers>
+        <NextIntlClientProvider messages={useMessages()}>
+          <Providers>
+            <UILoader>
               <NavbarContainer />
               {children}
               <FooterContainer />
-            </Providers>
-          </NextIntlClientProvider>
-        </UILoader>
+            </UILoader>
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
