@@ -11,11 +11,14 @@ import {
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/core/navigation';
 import { AiOutlineGlobal } from 'react-icons/ai';
+import { GetMethodStoreGlobal } from '@/globals/stores/session';
+import { HelperTime } from '@/globals/helpers';
 
 export default function LanguageSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const { setIsLoading } = GetMethodStoreGlobal();
   const [selectedKeys, setSelectedKeys] = useState(new Set([locale]));
 
   const selectedValue = useMemo(
@@ -37,7 +40,12 @@ export default function LanguageSwitcher() {
           disallowEmptySelection
           selectionMode="single"
           selectedKeys={selectedKeys}
-          onAction={(key) => router.replace(pathname, { locale: key.toString() })}
+          onAction={async (key) => {
+            setIsLoading(true);
+            router.replace(pathname, { locale: key.toString() });
+            await HelperTime.WaitForMilliSecond(1000);
+            setIsLoading(false);
+          }}
         >
           <DropdownItem className="dark:text-slate-400 text-black" key="en">
             English

@@ -7,17 +7,14 @@ import { Puff } from 'react-loader-spinner';
 export default function UILoader({ children }: { children: React.ReactNode }) {
   const { isLoading } = UseStoreGlobal(['isLoading']);
 
-  if (!isLoading) {
-    return <>{children}</>;
-  }
-
-  return (
+  return isLoading ? (
     <>
       {children}
       <div
         className={
+          isLoading &&
           styles.loaderOverlay +
-          ' flex items-center justify-center bg-gray-50 dark:bg-gray-800'
+            ' flex items-center justify-center bg-gray-50 dark:bg-gray-800'
         }
       >
         <Puff
@@ -30,5 +27,7 @@ export default function UILoader({ children }: { children: React.ReactNode }) {
         />
       </div>
     </>
+  ) : (
+    <>{children}</>
   );
 }
