@@ -8,9 +8,8 @@ export const useNavigateLoader = () => {
 
   const navigateWithLoader = async (path: string, loadTimeout: number) => {
     setIsLoading(true);
-    router.push(path);
     await HelperTime.WaitForMilliSecond(loadTimeout);
-    setIsLoading(false);
+    router.push(path);
   };
 
   return navigateWithLoader;

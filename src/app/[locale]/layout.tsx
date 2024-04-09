@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import React from 'react';
 import '@/globals/globals.css';
 import '@/globals/tailwind.css';
-import '@/globals/font.css';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import type { Viewport } from 'next';
 import NavbarContainer from '../components/layout/navbar-container';
 import FooterContainer from '../components/layout/footer-container';
 import { Providers } from './providers';
 import UILoader from '../components/loader/ui-loader';
+import localFont from 'next/font/local';
 
 export const metadata: Metadata = {
   title: 'PWA with Next',
@@ -62,19 +62,27 @@ type Props = {
   };
 };
 
+const localFontSRB = localFont({
+  src: '../messages/fonts/Sarabun-Regular.ttf',
+  variable: '--font-srb',
+  display: 'swap',
+  weight: '400',
+  style: 'normal',
+});
+
 const RootLayout: React.FC<Props> = ({ children, params: { locale } }) => {
   return (
     <html lang={locale}>
-      <body className="font-SRB">
-        <NextIntlClientProvider messages={useMessages()}>
-          <UILoader>
+      <body className={`${localFontSRB.variable} font-sans`}>
+        <UILoader>
+          <NextIntlClientProvider messages={useMessages()}>
             <Providers>
               <NavbarContainer />
               {children}
               <FooterContainer />
             </Providers>
-          </UILoader>
-        </NextIntlClientProvider>
+          </NextIntlClientProvider>
+        </UILoader>
       </body>
     </html>
   );

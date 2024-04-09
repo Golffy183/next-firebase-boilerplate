@@ -23,19 +23,3 @@ export type TypeRepositoryPattern = {
   }) => Promise<HelperType.TypeAPIDataHandleResponse>;
   UnsubscribeCallback: () => Promise<HelperType.TypeAPIDataHandleResponse>;
 };
-
-// const fetchData = async () => {
-//   setIsLoading(true);
-//   const resData = await API.findAssessmentFromOrganizationID(
-//     userData.profile.organizationID,
-//   );
-//   if (resData.error) {
-//     console.log('error :', resData.error);
-//     setIsLoading(false);
-//     return;
-//   }
-//   setIsLoading(false);
-//   // console.log('resData', resData.res);
-
-//   setContent(resData.res.data);
-// };
