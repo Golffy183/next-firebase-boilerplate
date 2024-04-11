@@ -20,16 +20,20 @@
       }
     }
   },
+  "Login": {
+    "title": "Login",
+    "description": "Please login with your account"
+  },
   "Navbar": {
     "header": {
       "home": "Home",
       "login": "Login",
       "about": "About"
+    },
+    "profile": {
+      "title": "Welcome, {name}!",
+      "logout": "Logout"
     }
-  },
-  "Login": {
-    "title": "Login",
-    "description": "Please login with your account"
   },
   "Form": {
     "validate": {

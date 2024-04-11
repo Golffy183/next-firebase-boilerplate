@@ -1,8 +1,6 @@
 import {
-  addDoc,
   collection,
   doc,
-  DocumentData,
   DocumentSnapshot,
   getDoc,
   getDocs,
@@ -72,16 +70,13 @@ export const CreateUserProfile = async (payload: {
   return { res, error: null };
 };
 
-export const ReadUserProfile =
-  async (): Promise<HelperType.TypeAPIDataHandleResponse> => {
-    const { currentUser } = middlewareFirebase.Auth.GetAuth();
-    if (!currentUser || !currentUser.uid) {
-      return { res: null, error: null };
-    }
-
-    // ======== User ========
-    const refUserCollection = collection(GetFirestore(), 'users');
-    const refUserDoc = doc(refUserCollection, currentUser.uid);
+export const ReadUserProfile = async (payload: {
+  userId: string;
+}): Promise<HelperType.TypeAPIDataHandleResponse> => {
+  // ======== User ========
+  const refUserCollection = collection(GetFirestore(), 'users');
+  try {
+    const refUserDoc = doc(refUserCollection, payload.userId);
     const resUserQuery = await HelperPromise.HandleResponse(getDoc(refUserDoc));
     // const resOrganizationQuery = await getDoc(refOrganizationDoc);
 
@@ -96,43 +91,46 @@ export const ReadUserProfile =
       data: resUser,
     };
 
-    // // ========== if no profile create user
-    // if (!resUser || (resUser && !('profile' in resUser))) {
-    //   console.log('no profile');
-    //   await setDoc(doc(refUserCollection, currentUser.uid), {}, { merge: true });
-    //   return { res: { data: { _id: currentUser.uid } }, error: null };
-    // }
-
-    // // ======== Organization ========
-    // const refOrganizationCollection = collection(GetFirestore(), 'organization');
-    // const refOrganizationDoc = doc(
-    //   refOrganizationCollection,
-    //   resUser?.profile.organizationID,
-    // );
-    // const resOrganizationQuery = await HelperPromise.HandleResponse(
-    //   getDoc(refOrganizationDoc),
-    // );
-    // // const resOrganizationQuery = await getDoc(refOrganizationDoc);
-
-    // if (resOrganizationQuery.error) {
-    //   console.log('resOrganizationQuery error :', resOrganizationQuery.error);
-    //   return resOrganizationQuery;
-    // }
-    // const resOrganization = (resOrganizationQuery.res as DocumentSnapshot).data();
-
-    // const res: HelperType.TypeAPIData = {
-    //   data: {
-    //     _id: currentUser.uid,
-    //     ...resUser,
-    //     organization: {
-    //       _id: resUser?.profile.organizationID,
-    //       ...resOrganization,
-    //     },
-    //   },
-    // };
-
     return { res, error: null };
-  };
+  } catch (error) {
+    return { res: null, error: error as Error };
+  }
+
+  // // ========== if no profile create user
+  // if (!resUser || (resUser && !('profile' in resUser))) {
+  //   console.log('no profile');
+  //   await setDoc(doc(refUserCollection, currentUser.uid), {}, { merge: true });
+  //   return { res: { data: { _id: currentUser.uid } }, error: null };
+  // }
+
+  // // ======== Organization ========
+  // const refOrganizationCollection = collection(GetFirestore(), 'organization');
+  // const refOrganizationDoc = doc(
+  //   refOrganizationCollection,
+  //   resUser?.profile.organizationID,
+  // );
+  // const resOrganizationQuery = await HelperPromise.HandleResponse(
+  //   getDoc(refOrganizationDoc),
+  // );
+  // // const resOrganizationQuery = await getDoc(refOrganizationDoc);
+
+  // if (resOrganizationQuery.error) {
+  //   console.log('resOrganizationQuery error :', resOrganizationQuery.error);
+  //   return resOrganizationQuery;
+  // }
+  // const resOrganization = (resOrganizationQuery.res as DocumentSnapshot).data();
+
+  // const res: HelperType.TypeAPIData = {
+  //   data: {
+  //     _id: currentUser.uid,
+  //     ...resUser,
+  //     organization: {
+  //       _id: resUser?.profile.organizationID,
+  //       ...resOrganization,
+  //     },
+  //   },
+  // };
+};
 
 export const ReadAllUser = async (): Promise<HelperType.TypeAPIDataHandleResponse> => {
   const refUserCollection = collection(GetFirestore(), 'users');

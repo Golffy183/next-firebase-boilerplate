@@ -16,14 +16,28 @@ import {
 import { ThemeSwitcher } from '../theme/theme-swithcer';
 import LanguageSwitcher from '../language/language-swithcer';
 import { usePathname, useRouter } from '@/core/navigation';
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { UseStoreGlobal } from '@/globals/stores/session';
 import { useNavigateLoader } from '../../hooks/navigate-loader';
-import { HelperTime } from '@/globals/helpers';
+import { HelperSecurity, HelperTime } from '@/globals/helpers';
 import { useTheme } from 'next-themes';
+import {
+  GetMethodStoreGlobalPersist,
+  UseStoreGlobalPersist,
+} from '@/globals/stores/persist';
+import APIGlobal from '@/globals/api';
+import ProfileIcon from './profile-icon';
+
+interface IProfile {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
 
 export default function NavbarContainer() {
   const { menuUIIsShow } = UseStoreGlobal(['menuUIIsShow']);
+  const { userData } = UseStoreGlobalPersist(['userData']);
+  const { setUserData } = GetMethodStoreGlobalPersist();
 
   const t = useTranslations();
   const pathname = usePathname();
@@ -31,16 +45,59 @@ export default function NavbarContainer() {
   const navigateWithLoader = useNavigateLoader();
   const { theme } = useTheme();
 
-  const menuItems = [
-    { href: `/`, text: t('Navbar.header.home') },
-    { href: `/about`, text: t('Navbar.header.about') },
-  ];
+  const menuItems = useMemo(
+    () => [
+      { href: `/`, text: t('Navbar.header.home') },
+      { href: `/about`, text: t('Navbar.header.about') },
+    ],
+    [t],
+  );
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHasUserProfile, setIsHasUserProfile] = useState(false);
 
-  if (!menuUIIsShow.isShowHeader) {
-    return <></>;
-  }
+  const profile = useRef({
+    firstName: '',
+    lastName: '',
+    email: '',
+  } as IProfile);
+
+  const setIsLogout = () => {
+    setIsHasUserProfile(false);
+  };
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const setUserProfile = async () => {
+      if (!userData) {
+        return;
+      }
+
+      const resProfile = await APIGlobal.ReadUserProfile({
+        userId: HelperSecurity.Decrypted(userData.uid),
+      });
+
+      if (resProfile.error) {
+        setUserData(null);
+        setIsHasUserProfile(false);
+        return;
+      }
+
+      profile.current = {
+        firstName: resProfile.res?.data.profile.firstName,
+        lastName: resProfile.res?.data.profile.lastName,
+        email: resProfile.res?.data.contact.email,
+      };
+
+      setIsHasUserProfile(true);
+    };
+
+    setMounted(true);
+    setUserProfile();
+  }, [userData, setUserData, setMounted]);
+
+  if (!mounted || !menuUIIsShow.isShowHeader) return null;
 
   return (
     <Navbar
@@ -91,7 +148,7 @@ export default function NavbarContainer() {
                   : 'warning'
                 : 'foreground'
             }
-            style={{ fontSize: 'min(max(0.75rem, 1vw), 1rem)' }}
+            style={{ fontSize: 'min(max(0.75rem, 0.8vw), 1rem)' }}
             aria-current="page"
             onPress={() => {
               router.push('/');
@@ -110,7 +167,7 @@ export default function NavbarContainer() {
                   : 'warning'
                 : 'foreground'
             }
-            style={{ fontSize: 'min(max(0.75rem, 1vw), 1rem)' }}
+            style={{ fontSize: 'min(max(0.75rem, 0.8vw), 1rem)' }}
             aria-current="page"
             onPress={() => {
               router.push('/about');
@@ -131,50 +188,58 @@ export default function NavbarContainer() {
           <LanguageSwitcher />
         </li>
         <NavbarItem>
-          <Button
-            as={Link}
-            className={theme === 'light' ? 'text-[#2E2EFF]' : ''}
-            color={theme === 'light' ? 'primary' : 'warning'}
-            onPress={async () => {
-              await HelperTime.WaitForMilliSecond(300);
-              await navigateWithLoader('/login', 1500);
-            }}
-            variant="flat"
-          >
-            {t('Navbar.header.login')}
-          </Button>
+          {isHasUserProfile ? (
+            <ProfileIcon
+              firstName={profile.current.firstName}
+              lastName={profile.current.lastName}
+              email={profile.current.email}
+              setIsLogout={() => setIsLogout()}
+            />
+          ) : (
+            <Button
+              as={Link}
+              className={theme === 'light' ? 'text-[#2E2EFF]' : ''}
+              color={theme === 'light' ? 'primary' : 'warning'}
+              onPress={async () => {
+                await HelperTime.WaitForMilliSecond(300);
+                await navigateWithLoader({
+                  path: '/login',
+                  loadTimeout: 1500,
+                });
+              }}
+              variant="flat"
+            >
+              {t('Navbar.header.login')}
+            </Button>
+          )}
         </NavbarItem>
       </NavbarContent>
 
       <NavbarMenu className="dark:bg-slate-900">
-        <ul>
-          {menuItems.map((item, index) => (
-            <li key={`${item}-${index}`}>
-              <NavbarMenuItem>
-                <Link
-                  className={
-                    item.href === pathname
-                      ? 'font-bold'
-                      : 'font-normal' + ' w-full cursor-pointer'
-                  }
-                  color={
-                    item.href === pathname
-                      ? theme === 'light'
-                        ? 'primary'
-                        : 'warning'
-                      : 'foreground'
-                  }
-                  onPress={() => {
-                    router.push(item.href);
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  {item.text}
-                </Link>
-              </NavbarMenuItem>
-            </li>
-          ))}
-        </ul>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              className={
+                item.href === pathname
+                  ? 'font-bold'
+                  : 'font-normal' + ' w-full cursor-pointer'
+              }
+              color={
+                item.href === pathname
+                  ? theme === 'light'
+                    ? 'primary'
+                    : 'warning'
+                  : 'foreground'
+              }
+              onPress={() => {
+                router.push(item.href);
+                setIsMenuOpen(false);
+              }}
+            >
+              {item.text}
+            </Link>
+          </NavbarMenuItem>
+        ))}
       </NavbarMenu>
     </Navbar>
   );

@@ -60,6 +60,14 @@ export default function LoginPage() {
       setErrorMessage: (name: any, error: any) => {
         setError(name, error);
       },
+      setIsLoginSuccess: (isLoginSuccess: boolean) => {
+        if (isLoginSuccess) {
+          navigateWithLoader({
+            path: '/',
+            loadTimeout: 1000,
+          });
+        }
+      },
     });
   };
 
@@ -145,7 +153,10 @@ export default function LoginPage() {
                 className="m-3 text-black"
                 onPress={async () => {
                   await HelperTime.WaitForMilliSecond(300);
-                  await navigateWithLoader('/', 1500);
+                  await navigateWithLoader({
+                    path: '/',
+                    loadTimeout: 1500,
+                  });
                 }}
               >
                 {t('Form.back')}

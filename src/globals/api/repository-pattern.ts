@@ -1,7 +1,9 @@
 import { HelperType } from '../helpers';
 
 export type TypeRepositoryPattern = {
-  ReadUserProfile: () => Promise<HelperType.TypeAPIDataHandleResponse>;
+  ReadUserProfile: (payload: {
+    userId: string;
+  }) => Promise<HelperType.TypeAPIDataHandleResponse>;
   CreateUserProfile: (payload: {
     title: string;
     firstname: string;

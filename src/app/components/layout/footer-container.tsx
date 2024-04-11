@@ -2,9 +2,15 @@
 
 import { UseStoreGlobal } from '@/globals/stores/session';
 import { Link } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
 
 export default function FooterContainer() {
   const { menuUIIsShow } = UseStoreGlobal(['menuUIIsShow']);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
 
   if (!menuUIIsShow.isShowFooter) {
     return <></>;
