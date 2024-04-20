@@ -71,6 +71,8 @@ export default function NavbarContainer() {
   useEffect(() => {
     const setUserProfile = async () => {
       if (!userData) {
+        setIsHasUserProfile(false);
+        setMounted(true);
         return;
       }
 
@@ -91,9 +93,9 @@ export default function NavbarContainer() {
       };
 
       setIsHasUserProfile(true);
+      setMounted(true);
     };
 
-    setMounted(true);
     setUserProfile();
   }, [userData, setUserData, setMounted]);
 
@@ -105,11 +107,11 @@ export default function NavbarContainer() {
       onMenuOpenChange={setIsMenuOpen}
       disableAnimation={false}
       isBordered
-      className="dark:bg-slate-950 bg-white"
+      className="bg-white dark:bg-slate-950"
     >
       <NavbarContent className="sm:hidden" justify="start">
         <li>
-          <NavbarMenuToggle className="dark:text-white text-black" />
+          <NavbarMenuToggle className="text-black dark:text-white" />
         </li>
         <li className="flex flex-row inset-y-0 left-[16.5%] absolute items-center dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
           <Image
@@ -120,7 +122,7 @@ export default function NavbarContainer() {
             alt="logo"
             priority
           />
-          <p className="font-bold ml-2 text-black dark:text-white">Next</p>
+          <p className="font-bold text-black ml-2 dark:text-white">Next</p>
         </li>
       </NavbarContent>
 
@@ -134,7 +136,7 @@ export default function NavbarContainer() {
             alt="logo"
             priority
           />
-          <p className="font-bold ml-2 text-black dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
+          <p className="font-bold text-black ml-2 dark:text-white dark:drop-shadow-[0_0_0.3rem_#00000070]">
             Next
           </p>
         </li>
@@ -183,7 +185,7 @@ export default function NavbarContainer() {
           <ThemeSwitcher />
           <LanguageSwitcher />
         </li>
-        <li className="flex sm:hidden items-center justify-end space-x-1">
+        <li className="flex space-x-1 items-center justify-end sm:hidden">
           <ThemeSwitcher />
           <LanguageSwitcher />
         </li>
