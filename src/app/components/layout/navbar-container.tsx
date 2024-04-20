@@ -27,6 +27,7 @@ import {
 } from '@/globals/stores/persist';
 import APIGlobal from '@/globals/api';
 import ProfileIcon from './profile-icon';
+import { middlewareFirebaseInit } from '@/core/middlewares/firebase';
 
 interface IProfile {
   firstName: string;
@@ -75,6 +76,8 @@ export default function NavbarContainer() {
         setMounted(true);
         return;
       }
+
+      await middlewareFirebaseInit();
 
       const resProfile = await APIGlobal.ReadUserProfile({
         userId: HelperSecurity.Decrypted(userData.uid),

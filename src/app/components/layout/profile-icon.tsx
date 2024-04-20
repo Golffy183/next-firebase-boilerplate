@@ -11,6 +11,7 @@ import {
   Divider,
 } from '@nextui-org/react';
 import { useTranslations } from 'next-intl';
+import path from 'path';
 
 type ProfileIconProps = {
   firstName: string;
@@ -40,7 +41,7 @@ const ProfileIcon = (props: ProfileIconProps) => {
           isBordered
           as="button"
           className="transition-transform"
-          src="./assets/temp-profile.jpg"
+          src={path.join(process.cwd(), 'assets/temp-profile.jpg')}
         />
       </DropdownTrigger>
       <DropdownMenu disabledKeys={['profile']} aria-label="User Actions" variant="flat">
