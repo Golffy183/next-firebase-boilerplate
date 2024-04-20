@@ -1,5 +1,6 @@
 {
   "name": "PWA with Next",
+  "description": "Progressive Web App with Next.js boilerplate",
   "short_name": "PWA Next",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
@@ -9,10 +10,10 @@
   "prefer_related_applications": true,
   "icons": [
     {
-      "src": "/icons/maskable_icon.png",
+      "src": "/icons/maskable-icon.png",
       "sizes": "196x196",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     },
     {
       "src": "/icons/icon-192x192.png",
@@ -23,6 +24,22 @@
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/wide-screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Wide Screenshot"
+    },
+    {
+      "src": "/screenshots/narrow-screenshot.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "narrow Screenshot"
     }
   ]
 }
